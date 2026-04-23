@@ -20,7 +20,7 @@ conda create --name trajflow python=3.10 -y
 conda activate trajflow 
 ```
 
-Please note that we use `python=3.10` mainly for compatibility with the `waymo-open-dataset-tf-2-12-0` package, which is required for metrics evaluation.
+Please note that we use `python=3.10` for compatibility with Waymo tooling and TensorFlow used for motion metrics evaluation.
 
 **Step 2:** Install the required packages
 
@@ -30,11 +30,24 @@ Please note that we use `python=3.10` mainly for compatibility with the `waymo-o
 # conda install pytorch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 pytorch-cuda=11.8 -c pytorch -c nvidia
 pip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cu118
 
-# install waymo helper
-pip install waymo-open-dataset-tf-2-12-0
-
-# install other packages
+# Core deps (includes tensorflow==2.13.0 and typing-extensions==4.12.2).
 pip install -r setup/requirements.txt
+
+# Waymo: the package metadata pins tensorflow==2.12, so install without deps after TensorFlow 2.13 is already present.
+pip install --no-deps 'waymo-open-dataset-tf-2-12-0==1.6.5'
+```
+
+If another dependency downgrades `typing-extensions` and you see import errors (for example `cannot import name 'Generator' from 'typing_extensions'`), reinstall it without pulling transitive pins:
+
+```bash
+pip install 'typing-extensions==4.12.2' --no-deps
+```
+
+If `pip install --no-deps waymo-open-dataset-tf-2-12-0` reports missing packages, install the wheel with dependencies first, then put TensorFlow back on 2.13:
+
+```bash
+pip install 'waymo-open-dataset-tf-2-12-0==1.6.5'
+pip install --force-reinstall 'tensorflow==2.13.0'
 ```
 
 **Step 3:** Compile CUDA code

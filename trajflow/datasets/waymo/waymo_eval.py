@@ -135,10 +135,10 @@ def transform_preds_to_waymo_format(pred_dicts, top_k_for_eval=-1, eval_second=8
         batch_pred_scores = np.zeros((num_scenario, 1, topK))
     
     gt_trajs = np.zeros((num_scenario, num_max_objs_per_scene, num_frames_in_total, 7))
-    gt_is_valid = np.zeros((num_scenario, num_max_objs_per_scene, num_frames_in_total), dtype=np.int)
+    gt_is_valid = np.zeros((num_scenario, num_max_objs_per_scene, num_frames_in_total), dtype=np.int64)
 
     object_type = np.zeros((num_scenario, num_max_objs_per_scene), dtype=object)
-    object_id = np.zeros((num_scenario, num_max_objs_per_scene), dtype=np.int)
+    object_id = np.zeros((num_scenario, num_max_objs_per_scene), dtype=np.int64)
     scenario_id = np.zeros((num_scenario), dtype=object)
 
     object_type_cnt_dict = {}
@@ -200,9 +200,9 @@ def waymo_evaluation(pred_dicts, top_k=-1, eval_second=8, num_modes_for_eval=6, 
     pred_score = tf.convert_to_tensor(pred_score, np.float32)
     pred_trajs = tf.convert_to_tensor(pred_trajectory, np.float32)
     gt_trajs = tf.convert_to_tensor(gt_infos['gt_trajectory'], np.float32)
-    gt_is_valid = tf.convert_to_tensor(gt_infos['gt_is_valid'], np.bool)
+    gt_is_valid = tf.convert_to_tensor(gt_infos['gt_is_valid'], tf.bool)
     pred_gt_indices = tf.convert_to_tensor(gt_infos['pred_gt_indices'], tf.int64)
-    pred_gt_indices_mask = tf.convert_to_tensor(gt_infos['pred_gt_indices_mask'], np.bool)
+    pred_gt_indices_mask = tf.convert_to_tensor(gt_infos['pred_gt_indices_mask'], tf.bool)
     object_type = tf.convert_to_tensor(gt_infos['object_type'], tf.int64)
 
     metric_results = py_metrics_ops.motion_metrics(

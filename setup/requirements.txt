@@ -1,16 +1,8 @@
-numpy
-wandb
 easydict
-pyyaml
-scikit-image
-tqdm
-einops
-scikit-learn
-matplotlib
-accelerate
-einops
 ema-pytorch
 gitpython
-protobuf===3.20.3
-typing-extensions===4.5.0
-GitPython
+wandb
+
+# Motion metrics: use TensorFlow 2.13 with waymo-open-dataset-tf-2-12-0==1.6.5 (install Waymo after; see README).
+tensorflow==2.13.0
+typing-extensions==4.12.2

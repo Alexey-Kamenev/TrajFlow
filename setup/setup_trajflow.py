@@ -44,7 +44,8 @@ def write_version_to_file(version, target_file):
 
 
 if __name__ == '__main__':
-    version = '0.0.0+%s' % get_git_commit_number()
+    # version = '0.0.0+%s' % get_git_commit_number()
+    version = '0.0.1'
     write_version_to_file(version, 'trajflow/version.py')
 
     setup(
