@@ -4,6 +4,11 @@
 # This source code is licensed under the license found in the
 # LICENSE file in the root directory of this source tree.
 
+import os
+
+# Headless matplotlib before wandb/trainer import matplotlib (tk/Tcl is unsafe with
+# DataLoader workers and torchrun teardown).
+os.environ.setdefault("MPLBACKEND", "Agg")
 
 import torch
 from torch.nn.parallel import DistributedDataParallel

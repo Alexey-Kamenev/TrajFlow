@@ -17,7 +17,7 @@ We propose a new flow matching framework to predict multi-modal trajectories on 
 
 ```bash
 conda create --name trajflow python=3.10 -y
-conda activate trajflow 
+conda activate trajflow
 ```
 
 Please note that we use `python=3.10` for compatibility with Waymo tooling and TensorFlow used for motion metrics evaluation.
@@ -30,7 +30,7 @@ Please note that we use `python=3.10` for compatibility with Waymo tooling and T
 # conda install pytorch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 pytorch-cuda=11.8 -c pytorch -c nvidia
 pip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cu118
 
-# Core deps (includes tensorflow==2.13.0 and typing-extensions==4.12.2).
+# Core deps (includes tensorflow==2.13.0).
 pip install -r setup/requirements.txt
 
 # Waymo: the package metadata pins tensorflow==2.12, so install without deps after TensorFlow 2.13 is already present.

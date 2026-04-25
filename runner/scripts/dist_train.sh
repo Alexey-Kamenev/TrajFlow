@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 set -x
+# Headless matplotlib for all ranks before Python starts (avoids tkinter/Tcl issues).
+export MPLBACKEND="${MPLBACKEND:-Agg}"
 NGPUS=$1
 PY_ARGS=${@:2}
 
